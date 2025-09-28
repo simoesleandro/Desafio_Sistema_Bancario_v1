@@ -1,84 +1,85 @@
-# 🏦 Sistema Bancário com POO em Python
+# 🏦 Sistema Bancário em Python com POO
 
-![Python](https://img.shields.io/badge/python-3.7+-blue.svg)
-![Licença](https://img.shields.io/badge/licen%C3%A7a-MIT-green.svg)
-![Status](https://img.shields.io/badge/status-Conclu%C3%ADdo-brightgreen.svg)
+<p align="left">
+  <a href="https://www.python.org" target="_blank">
+    <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python"/>
+  </a>
+  <img src="https://img.shields.io/badge/Status-Conclu%C3%ADdo-brightgreen?style=for-the-badge" alt="Status do Projeto"/>
+  <img src="https://img.shields.io/badge/Licen%C3%A7a-MIT-blue?style=for-the-badge" alt="Licença MIT"/>
+</p>
 
-## 🎯 Contexto do Projeto
+## 🎯 Sobre o Projeto
 
-Este projeto foi desenvolvido como resposta ao **Desafio de Código "Modelando um Sistema Bancário em Python"** do bootcamp **Suzano - Python Developer #2**. O principal objetivo é aplicar na prática os conceitos de Programação Orientada a Objetos (POO) para construir um sistema funcional e bem estruturado.
+Este projeto é a minha implementação do desafio "Modelando um Sistema Bancário em Python" proposto no bootcamp **Suzano - Python Developer \#2**. O objetivo foi criar, a partir do zero, um sistema bancário funcional utilizando os princípios da **Programação Orientada a Objetos (POO)**.
+
+Foi uma jornada incrível de aprendizado, onde pude solidificar conceitos essenciais e transformar teoria em código funcional. Mais do que apenas um sistema, este projeto representa um passo importante na minha evolução como desenvolvedor.
+
+## ✨ Funcionalidades Principais
+
+O sistema oferece uma experiência de terminal interativa com as seguintes operações:
+
+  * **👤 Gestão de Clientes:** Cadastrar novos usuários (Pessoas Físicas).
+  * **💳 Criação de Contas:** Abrir contas correntes vinculadas a um cliente.
+  * **💰 Transações Seguras:**
+      * **Depositar:** Adicionar valores à conta (apenas valores positivos).
+      * **Sacar:** Retirar dinheiro, com validação de saldo, limite de R$ 500 por saque e máximo de 3 saques diários.
+  * **📜 Extrato Detalhado:** Visualizar o histórico completo de transações, incluindo data e hora.
+  * \*\* robustez:\*\* Tratamento de entradas inválidas para garantir a estabilidade do programa.
 
 ## 💡 Conceitos de POO Aplicados
 
-Para a construção deste sistema, foram aplicados os seguintes pilares e conceitos de POO:
+A estrutura do projeto foi pensada para ser modular e escalável, aplicando os pilares da POO:
 
--   **Abstração:** Criação de classes como `Conta`, `Cliente` e `Transacao` que representam entidades do mundo real de forma simplificada.
--   **Encapsulamento:** Proteção dos atributos das classes (como `_saldo` e `_agencia`), expondo o acesso a eles apenas através de métodos públicos (`sacar()`, `depositar()`, etc.).
--   **Herança:** Utilização de uma classe base (`Cliente`) para criar classes mais específicas (`PessoaFisica`), aproveitando e estendendo seu comportamento.
--   **Composição:** A classe `Conta` é "composta por" um objeto da classe `Historico`, demonstrando uma relação "tem-um" forte entre elas.
+  * **Abstração:** Modelagem de entidades do mundo real (`Conta`, `Cliente`) em classes.
+  * **Encapsulamento:** Proteção dos dados, como o saldo, garantindo que o acesso seja feito de forma controlada.
+  * **Herança:** Criação de classes mais específicas a partir de uma base (`ContaCorrente` herda de `Conta`).
+  * **Composição:** Construção de classes complexas a partir de outras mais simples (`Conta` "tem um" `Historico`).
 
-## ✨ Funcionalidades
+## 🏗️ Estrutura das Classes
 
--   👤 **Gestão de Clientes:** Cadastro de clientes do tipo Pessoa Física.
--   💳 **Criação de Contas:** Abertura de contas correntes vinculadas a um cliente.
--   💰 **Operações Financeiras:**
-    -   **Depósitos:** Com validação para aceitar apenas valores positivos.
-    -   **Saques:** Com verificação de saldo e controle de limite de saques diários.
--   📜 **Histórico de Transações:** Registro detalhado de todas as operações realizadas.
+A organização das classes foi um ponto central no desenvolvimento. A tabela abaixo ilustra a responsabilidade de cada uma:
 
-## 🏗️ Estrutura do Projeto
+| Classe         | Herança    | Responsabilidade Principal                                      |
+| :------------- | :--------- | :-------------------------------------------------------------- |
+| `Cliente`      | -          | Gerencia os dados do usuário e sua lista de contas.             |
+| `PessoaFisica` | `Cliente`  | Especializa `Cliente` com atributos como CPF e data de nascimento. |
+| `Conta`        | -          | Classe base que define a estrutura de uma conta bancária.       |
+| `ContaCorrente`| `Conta`    | Implementa regras de negócio específicas, como limites de saque. |
+| `Historico`    | -          | Armazena e gerencia a lista de transações de uma conta.         |
+| `Transacao`    | (Abstrata) | Define a interface para as operações de depósito e saque.       |
+| `Deposito`     | `Transacao`| Representa a operação de depósito, registrando o valor.         |
+| `Saque`        | `Transacao`| Representa a operação de saque, validando limites e saldo.      |
 
-O projeto foi modelado utilizando os seguintes componentes principais:
+## 🚀 Como Executar o Projeto
 
-| Classe          | Herança         | Responsabilidade                                            |
-| --------------- | --------------- | ----------------------------------------------------------- |
-| `Cliente`       | -               | Gerencia os dados do usuário e suas contas.                 |
-| `PessoaFisica`  | `Cliente`       | Especializa `Cliente` com atributos como CPF e data de nascimento. |
-| `Conta`         | -               | Classe base que define a estrutura de uma conta bancária.   |
-| `ContaCorrente` | `Conta`         | Implementa regras específicas, como limite de saques.       |
-| `Historico`     | -               | Armazena e gerencia a lista de transações de uma conta.     |
-| `Transacao`     | (Abstrata)      | Interface para as operações de depósito e saque.            |
-| `Deposito`      | `Transacao`     | Representa a operação de depósito.                          |
-| `Saque`         | `Transacao`     | Representa a operação de saque.                             |
-
-## 🚀 Começando
-
-Siga as instruções abaixo para executar o projeto em seu ambiente local.
+Para testar o sistema em sua máquina, siga os passos abaixo.
 
 ### Pré-requisitos
 
--   Python 3.7 ou superior.
+  * **Python 3.7** ou superior.
 
-### Instalação
+### Passos
 
-1.  Clone o repositório:
-    ```sh
-    git clone [https://github.com/seu-usuario/seu-repositorio.git](https://github.com/seu-usuario/seu-repositorio.git)
-    ```
-2.  Navegue até o diretório do projeto:
-    ```sh
-    cd seu-repositorio
+1.  **Clone o repositório:**
+
+    ```bash
+    git clone https://github.com/simoesleandro/Desafio_Sistema_Bancario_v1.git
     ```
 
-### 👨‍💻 Exemplo de Uso
+2.  **Navegue até o diretório do projeto:**
 
-```python
-# Crie um cliente
-cliente_maria = PessoaFisica(nome="Maria da Silva", data_nascimento="01/01/1990", cpf="123.456.789-00", endereco="Rua A, 123")
+    ```bash
+    cd Desafio_Sistema_Bancario_v1
+    ```
 
-# Crie uma conta para o cliente
-conta_maria = ContaCorrente.nova_conta(cliente=cliente_maria, numero=1001)
+3.  **Execute o script principal:**
 
-# Realize operações
-conta_maria.depositar(1000)
-conta_maria.sacar(200)
+    ```bash
+    python Desafio_v1.py
+    ```
 
-# Exiba o extrato
-print("================ EXTRATO ================")
-for transacao in conta_maria.historico.transacoes:
-    print(f"{transacao['tipo']}:\t R$ {transacao['valor']:.2f}")
+Pronto\! Agora é só seguir as instruções do menu interativo no terminal.
 
-print(f"\nSaldo atual:\t R$ {conta_maria.saldo:.2f}")
-print("=======================================")
-📝 Licença
-Este projeto está sob a licença MIT.
+## 📝 Licença
+
+Este projeto está sob a licença MIT. Sinta-se à vontade para explorar, modificar e usar como referência para seus estudos\!
